@@ -2,7 +2,6 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -35,6 +34,8 @@ public class ApfTestAutomation {
         $(".react-datepicker__month-select").selectOptionByValue("2");
         $(".react-datepicker__day--021").click();
 
+        $("#subjectsInput").setValue("Math").pressEnter();
+
         $("#uploadPicture").uploadFromClasspath("Photo.jpg");
 
         $("#currentAddress").scrollTo().setValue("Tridevyatoe Tsartsvo, Dvorets, Palata #1");
@@ -44,16 +45,9 @@ public class ApfTestAutomation {
 
         $("#submit").click();
 
-        $(".table > thead:nth-child(1)").shouldHave(text("Label"), text("Values"));
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table > tbody:nth-child(2)").shouldHave(text("Ivanushka"), text("Durachok"),
                 text("VanyaDuren@tridevyatoe.ru"), text("0102030405"), text("21 March,2012"), text("Photo.jpg"),
                 text("Tridevyatoe Tsartsvo, Dvorets, Palata #1"), text("NCR Delhi"));
-
-        $("#close-fixedban").click();
-        $("#closeLargeModal").scrollTo().click();
-
-
-
-
     }
 }
