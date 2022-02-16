@@ -1,12 +1,15 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationForm;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class ApfTestAutomation {
+public class ApfTestAutomationWithPageObject {
 
     @BeforeAll
     static void startPage() {
@@ -18,9 +21,8 @@ public class ApfTestAutomation {
         open("/automation-practice-form");
 
         $(".main-header").shouldHave(text("Practice Form"));
-
-        $("#firstName").setValue("Ivanushka");
-        $("#lastName").setValue("Durachok");
+        new RegistrationForm().setFirstName("Ivanushka");
+        new RegistrationForm().setLastName("Durachok");
         $("#userEmail").setValue("VanyaDuren@tridevyatoe.ru");
         $("#userNumber").setValue("0102030405");
 
@@ -46,8 +48,9 @@ public class ApfTestAutomation {
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table > tbody:nth-child(2)").shouldHave(text("Ivanushka"), text("Durachok"),
-                text("VanyaDuren@tridevyatoe.ru"), text("0102030405"), text("21 March,2012"), text("Photo.jpg"),
-                text("Tridevyatoe Tsartsvo, Dvorets, Palata #1"), text("NCR Delhi"));
+        new RegistrationForm().checkForm("Student Name", "Ivanushka Durachok");
+        new RegistrationForm().checkForm("Student Email", "VanyaDuren@tridevyatoe.ru");
+        new RegistrationForm().checkForm("Gender", "Male");
+
     }
 }
