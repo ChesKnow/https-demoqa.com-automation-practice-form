@@ -11,6 +11,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ApfTestAutomationWithPageObject {
 
+    RegistrationForm registrationPage = new RegistrationForm();
+    String firstName = "Ivanushka";
+
     @BeforeAll
     static void startPage() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -21,8 +24,8 @@ public class ApfTestAutomationWithPageObject {
         open("/automation-practice-form");
 
         $(".main-header").shouldHave(text("Practice Form"));
-        new RegistrationForm().setFirstName("Ivanushka");
-        new RegistrationForm().setLastName("Durachok");
+        registrationPage.setFirstName(firstName);
+        registrationPage.setLastName("Durachok");
         $("#userEmail").setValue("VanyaDuren@tridevyatoe.ru");
         $("#userNumber").setValue("0102030405");
 
@@ -48,9 +51,9 @@ public class ApfTestAutomationWithPageObject {
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        new RegistrationForm().checkForm("Student Name", "Ivanushka Durachok");
-        new RegistrationForm().checkForm("Student Email", "VanyaDuren@tridevyatoe.ru");
-        new RegistrationForm().checkForm("Gender", "Male");
+        registrationPage.checkForm("Student Name", firstName + " Durachok");
+        registrationPage.checkForm("Student Email", "VanyaDuren@tridevyatoe.ru");
+        registrationPage.checkForm("Gender", "Male");
 
     }
 }
