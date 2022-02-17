@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationForm;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -30,15 +31,12 @@ public class ApfTestAutomationWithPageObject {
         $("#userEmail").setValue("VanyaDuren@tridevyatoe.ru");
         $("#userNumber").setValue("0102030405");
 
-        $("div.custom-radio:nth-child(1) > label:nth-child(2)").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
-        $("div.custom-checkbox:nth-child(1)").click();
-        $("div.custom-checkbox:nth-child(2)").click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
 
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOptionByValue("2012");
-        $(".react-datepicker__month-select").selectOptionByValue("2");
-        $(".react-datepicker__day--021").click();
+        registrationPage.setBirthDate("21", "March", "2012");
 
         $("#subjectsInput").setValue("Math").pressEnter();
 
@@ -46,8 +44,10 @@ public class ApfTestAutomationWithPageObject {
 
         $("#currentAddress").scrollTo().setValue("Tridevyatoe Tsartsvo, Dvorets, Palata #1");
 
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#state").click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
+        $("#city").click();
+        $("#stateCity-wrapper").$(byText("Noida")).click();
 
         $("#submit").click();
 
