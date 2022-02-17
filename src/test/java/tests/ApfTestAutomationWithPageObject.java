@@ -13,6 +13,7 @@ public class ApfTestAutomationWithPageObject {
 
     RegistrationForm registrationPage = new RegistrationForm();
     String firstName = "Ivanushka";
+    String lastName = "Durachok";
 
     @BeforeAll
     static void startPage() {
@@ -23,9 +24,9 @@ public class ApfTestAutomationWithPageObject {
     void apfTest() {
         open("/automation-practice-form");
 
-        $(".main-header").shouldHave(text("Practice Form"));
-        registrationPage.setFirstName(firstName);
-        registrationPage.setLastName("Durachok");
+        registrationPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName);
         $("#userEmail").setValue("VanyaDuren@tridevyatoe.ru");
         $("#userNumber").setValue("0102030405");
 
@@ -51,9 +52,9 @@ public class ApfTestAutomationWithPageObject {
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        registrationPage.checkForm("Student Name", firstName + " Durachok");
-        registrationPage.checkForm("Student Email", "VanyaDuren@tridevyatoe.ru");
-        registrationPage.checkForm("Gender", "Male");
+        registrationPage.checkForm("Student Name", firstName + " " + lastName)
+                .checkForm("Student Email", "VanyaDuren@tridevyatoe.ru")
+                .checkForm("Gender", "Male");
 
     }
 }
