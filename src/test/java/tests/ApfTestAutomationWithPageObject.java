@@ -45,8 +45,8 @@ public class ApfTestAutomationWithPageObject {
                 .setUserNumber(studentNumber)
                 .setCurrentAddress(currentAddress);
 
-        registrationPage.setGender(gender);
-        registrationPage.setHobbies(hobbies1)
+        registrationPage.setGender(gender)
+                .setHobbies(hobbies1)
                 .setHobbies(hobbies2);
 
         registrationPage.setBirthDate(day, month, year);

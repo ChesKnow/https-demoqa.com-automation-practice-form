@@ -66,8 +66,9 @@ public class RegistrationForm {
 
     }
 
-    public void setGender(String wrapperValue) {
+    public RegistrationForm setGender(String wrapperValue) {
         gender.$(byText(wrapperValue)).click();
+        return this;
     }
 
     public RegistrationForm setHobbies(String wrapperValue) {
