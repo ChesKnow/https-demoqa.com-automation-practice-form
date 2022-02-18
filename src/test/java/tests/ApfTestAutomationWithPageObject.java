@@ -15,6 +15,19 @@ public class ApfTestAutomationWithPageObject {
     RegistrationForm registrationPage = new RegistrationForm();
     String firstName = "Ivanushka";
     String lastName = "Durachok";
+    String studentEmail = "VanyaDuren@tridevyatoe.ru";
+    String studentNumber = "0102030405";
+    String currentAddress = "Tridevyatoe Tsartsvo, Dvorets, Palata #1";
+    String gender = "Male";
+    String hobbies1 = "Sports";
+    String hobbies2 = "Music";
+    String subject = "Maths";
+    String pictureName = "Photo.jpg";
+    String state = "NCR";
+    String city = "Noida";
+    String day = "21";
+    String month = "March";
+    String year = "2012";
 
     @BeforeAll
     static void startPage() {
@@ -27,34 +40,38 @@ public class ApfTestAutomationWithPageObject {
 
         registrationPage.openPage()
                 .setFirstName(firstName)
-                .setLastName(lastName);
-        $("#userEmail").setValue("VanyaDuren@tridevyatoe.ru");
-        $("#userNumber").setValue("0102030405");
+                .setLastName(lastName)
+                .setUserEmail(studentEmail)
+                .setUserNumber(studentNumber)
+                .setCurrentAddress(currentAddress);
 
-        $("#genterWrapper").$(byText("Male")).click();
+        registrationPage.setGender(gender);
+        registrationPage.setHobbies(hobbies1)
+                .setHobbies(hobbies2);
 
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#hobbiesWrapper").$(byText("Music")).click();
+        registrationPage.setBirthDate(day, month, year);
 
-        registrationPage.setBirthDate("21", "March", "2012");
+        registrationPage.enterSubject(subject);
 
-        $("#subjectsInput").setValue("Math").pressEnter();
+        registrationPage.uploadPicture(pictureName);
 
-        $("#uploadPicture").uploadFromClasspath("Photo.jpg");
+        registrationPage.setState(state);
+        registrationPage.setCity(city);
 
-        $("#currentAddress").scrollTo().setValue("Tridevyatoe Tsartsvo, Dvorets, Palata #1");
+        registrationPage.submitForm();
 
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Noida")).click();
+        registrationPage.checkSubmitOk();
 
-        $("#submit").click();
-
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         registrationPage.checkForm("Student Name", firstName + " " + lastName)
-                .checkForm("Student Email", "VanyaDuren@tridevyatoe.ru")
-                .checkForm("Gender", "Male");
+                .checkForm("Student Email", studentEmail)
+                .checkForm("Gender", gender)
+                .checkForm("Mobile", studentNumber)
+                .checkForm("Date of Birth", day + " " + month + "," + year)
+                .checkForm("Subjects", subject)
+                .checkForm("Hobbies", hobbies1 + ", " + hobbies2)
+                .checkForm("Picture", pictureName)
+                .checkForm("Address", currentAddress)
+                .checkForm("State and City", state + " " + city);
 
     }
 }
