@@ -36,7 +36,7 @@ public class ApfTestAutomationWithPageObject {
 
     @Test
     void apfTest() {
-        open("/automation-practice-form");
+
 
         registrationPage.openPage()
                 .setFirstName(firstName)
@@ -46,8 +46,8 @@ public class ApfTestAutomationWithPageObject {
                 .setCurrentAddress(currentAddress);
 
         registrationPage.setGender(gender)
-                .setHobbies(hobbies1)
-                .setHobbies(hobbies2);
+                .setHobby(hobbies1)
+                .setHobby(hobbies2);
 
         registrationPage.setBirthDate(day, month, year);
 

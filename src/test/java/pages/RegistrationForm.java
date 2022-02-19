@@ -71,7 +71,7 @@ public class RegistrationForm {
         return this;
     }
 
-    public RegistrationForm setHobbies(String wrapperValue) {
+    public RegistrationForm setHobby(String wrapperValue) {
         hobbies.$(byText(wrapperValue)).click();
         return this;
     }
@@ -80,8 +80,8 @@ public class RegistrationForm {
         subject.setValue(subjectName).pressEnter();
     }
 
-    public void uploadPicture(String PictureName) {
-        upload.uploadFromClasspath(PictureName);
+    public void uploadPicture(String pictureName) {
+        upload.uploadFromClasspath(pictureName);
     }
 
     public void setState(String stateName) {
