@@ -12,7 +12,8 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ApfTestAutomationWithCommentsWithFaker extends TestBase {
 
-    Faker faker = new Faker(new Locale("ru"));
+    Faker faker = new Faker();
+    //Faker faker = new Faker(new Locale("ru"));
 
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
